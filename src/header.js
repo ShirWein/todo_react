@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Header({text, title, onAddItem}) {
+export function Header({text, title, onAddItem, onToggleAllItems}) {
 
     function handleTaskInput(event) {
         if (event.key === 'Enter') {            
@@ -9,6 +9,10 @@ export function Header({text, title, onAddItem}) {
 
             }
         };
+    
+    function handleToggleAll(event) {
+            onToggleAllItems(event.target.checked);
+        }
 
     return (
     <header className='header'>
@@ -17,6 +21,10 @@ export function Header({text, title, onAddItem}) {
                 placeholder={text}
                 onKeyUp={handleTaskInput}
                 autoFocus/>
+            <input className='toggle-all'
+                type="checkbox"
+                onChange={handleToggleAll} />
+            <label htmlFor='toggle-all'></label>
     </header>
     );
 }

@@ -16,30 +16,24 @@ import React from 'react';
 // }
 
 
-export function Main({items, removeItem, completeItem, onToggleAllItems}) {
+export function Main({items, removeItem, onCompleteItem, onToggleAllItems}) {
 
 
-
-    function handleCompletedItem(event) {
-            completeItem(event.target.value);
-            console.log(event.target.value);
-        } 
+    // function handleCompletedItem(event) {
+    //     onCompleteItem(event.target.checked);
+    // }
+     
         
-    function handleToggleAll(event) {
-        onToggleAllItems(event.target.checked);
-    }
+    
            
     return (
         <main>
-            <input className='toggle-all'
-                type="checkbox"
-                onChange={handleToggleAll} />
-            <label for='toggle-all'></label>
+            
             <ul className='todo-list'>
             {items.map(item => {
-                return (<li><div className="view">
+                return (<li className={item.completed ? 'completed' : ''}><div className="view">
                 <input className="toggle"
-                    type="checkbox" onChange={handleCompletedItem}/>
+                    type="checkbox" onChange={() => onCompleteItem(item.id)}/>
                 <label style={item.completed?{textDecoration: 'line-through'}: null}>{item.title}</label>
                 <button className="destroy" onClick={() => removeItem(item)}/>
                 </div>

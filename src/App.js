@@ -39,6 +39,7 @@ function App() {
 
   const addTodo = (title) => {
     const newTodos = todos.concat({id: Date.now(), title, completed: false});
+    console.log(newTodos);
     // or: todos = [...todos, {id: Date.now(), title, completed: false}]
     setTodos(newTodos);
     // setCount(count+1);
@@ -49,25 +50,19 @@ function App() {
     setTodos(newTodosRemove);
   }
 
-  // const removeTodo = (title) => {
-  //   const index = todos.indexOf(title);
-    //q todos.splice(index, 1);
-    
-  // }
 
   const markAsCompleted = (title) => {
-    // const newTodoList = todos.map(item => {
-    //   if (item.title === title)
-    //       return {title, completed: !item.completed} 
-    //   return item; 
-    //   })
-      // console.log(newTodoList); 
-  //   for (const obj of todos) {
-  //     if (obj.title === title) {
-  //        obj.completed = !obj.completed;
-  //        break;
-  //      }
-  //    } 
+    let newTask = todos.map(task => {
+      if (task.id === title) {
+        return ({...task, completed: !task.completed})
+      }
+      return task;
+    })
+    setTodos(newTask);
+    console.log(newTask);
+    // const completeItem = todos.map(todo => ({...title.id, completed: true}));
+    // setTodos(completeItem);
+    // console.log(completeItem);
   } 
 
   const clearAllCompletedItems = () => {
@@ -79,6 +74,7 @@ function App() {
   const toggleAll = (checkedValue) => {
     const todosToggle = todos.map(todo => ({... todo, completed: checkedValue}));
     setTodos(todosToggle);
+    console.log(todosToggle);
   }
 
 
@@ -88,8 +84,8 @@ function App() {
 
   return (
     <section className="todoapp">
-      <Header title={appTitle} onAddItem={addTodo} text="What needs to be done?" />
-      <Main items={todos} onToggleAllItems = {toggleAll} className='main' completeItem = {markAsCompleted} removeItem={removeTodo}/> 
+      <Header title={appTitle} onAddItem={addTodo} onToggleAllItems = {toggleAll} text="What needs to be done?" />
+      <Main items={todos} className='main' onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
       <Footer onClearCompleted={clearAllCompletedItems} itemLeftCount={noneCompletedItemsCount} className="footer"/>
     </section>
     );
