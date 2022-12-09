@@ -1,0 +1,22 @@
+import React from 'react';
+
+export function Header({text, title, onAddItem}) {
+
+    function handleTaskInput(event) {
+        if (event.key === 'Enter') {            
+            onAddItem(event.target.value);
+            console.log(event.target.value);
+
+            }
+        };
+
+    return (
+    <header className='header'>
+        <h1>{title}</h1>
+        <input className='new-todo' 
+                placeholder={text}
+                onKeyUp={handleTaskInput}
+                autoFocus/>
+    </header>
+    );
+}
