@@ -17,19 +17,22 @@ import { useState } from 'react';
 // }
 
 
-export function Main({items, removeItem, onCompleteItem, onToggleAllItems, onEditMode}) {
-
+export function Main({items, add,removeItem, onCompleteItem, onToggleAllItems, onEditMode}) {
+        
+    const [editMode, setEditMode] = useState(false);
 
     // function handleCompletedItem(event) {
     //     onCompleteItem(event.target.checked);
     // }
     function handleEditInput(event) {
         if (event.key === 'Enter') {            
-            console.log(event.target.value);
+            // console.log(event.target.value);
+            
             onEditMode(event);
-            event.title = event.target.value
-            return (<label>(event.target.value)</label>);
-
+            setEditMode(false);
+            // event.edit = false;
+            // event.title = event.target.value;
+            // console.log(event);
             }
         };
     

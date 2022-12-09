@@ -77,15 +77,16 @@ function App() {
   }
 
   const dubleClickEditTask = (title) => {
-      const editTask = todos.map(task => {
+      let editTask = todos.map(task => {
         if (task.id === title) {
-          return ({...task, edit: !task.edit})
+          return ({...task, title:task.title, edit: !task.edit})
         }
         return task;
       })
-      console.log(editTask);
+      // console.log(editTask);
       setEditMode(editTask.edit);
       setTodos(editTask);
+      console.log(editTask);
     
   }
         
@@ -109,7 +110,7 @@ function App() {
   return (
     <section className="todoapp">
       <Header title={appTitle} onAddItem={addTodo} onToggleAllItems = {toggleAll} text="Add a task" />
-      <Main items={todos} className='main' onEditMode = {dubleClickEditTask} onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
+      <Main items={todos} className='main' add={addTodo} onEditMode = {dubleClickEditTask} onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
       <Footer onClearCompleted={clearAllCompletedItems} itemLeftCount={noneCompletedItemsCount} className="footer"/>
     </section>
     );
