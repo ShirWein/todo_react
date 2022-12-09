@@ -6,6 +6,7 @@ export function Header({text, title, onAddItem, onToggleAllItems}) {
         if (event.key === 'Enter') {            
             onAddItem(event.target.value);
             console.log(event.target.value);
+            
 
             }
         };

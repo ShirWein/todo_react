@@ -11,8 +11,8 @@ function App() {
   const appTitle = 'Todo\'s App';
 
   const [todos, setTodos] = useState([]);
-  // const [count, setCount] = useState(0);
   const [noneCompletedItemsCount, setNoneCompletedItemsCount] = useState(0);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect( ()=> {
     const uncompleted = todos.filter(todo=>!todo.completed);
@@ -38,8 +38,7 @@ function App() {
   // todo: 
 
   const addTodo = (title) => {
-    const newTodos = todos.concat({id: Date.now(), title, completed: false});
-    console.log(newTodos);
+    const newTodos = todos.concat({id: Date.now(), title, completed: false, edit:false});
     // or: todos = [...todos, {id: Date.now(), title, completed: false}]
     setTodos(newTodos);
     // setCount(count+1);
@@ -77,6 +76,31 @@ function App() {
     console.log(todosToggle);
   }
 
+  const dubleClickEditTask = (title) => {
+      const editTask = todos.map(task => {
+        if (task.id === title) {
+          return ({...task, edit: !task.edit})
+        }
+        return task;
+      })
+      console.log(editTask);
+      setEditMode(editTask.edit);
+      setTodos(editTask);
+    
+  }
+        
+        
+  //       task => {
+  //       if (task.id === title) {
+  //         task.title = title;
+  //       }
+  //       console.log(task);
+  //       return task;
+  //     })
+  //     setEditMode(editTask);
+  //     setTodos(editTask);
+  // }
+
 
   // todo: pass item left to footer.
 
@@ -84,8 +108,8 @@ function App() {
 
   return (
     <section className="todoapp">
-      <Header title={appTitle} onAddItem={addTodo} onToggleAllItems = {toggleAll} text="What needs to be done?" />
-      <Main items={todos} className='main' onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
+      <Header title={appTitle} onAddItem={addTodo} onToggleAllItems = {toggleAll} text="Add a task" />
+      <Main items={todos} className='main' onEditMode = {dubleClickEditTask} onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
       <Footer onClearCompleted={clearAllCompletedItems} itemLeftCount={noneCompletedItemsCount} className="footer"/>
     </section>
     );
