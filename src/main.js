@@ -17,22 +17,18 @@ import { useState } from 'react';
 // }
 
 
-export function Main({items, add,removeItem, onCompleteItem, onToggleAllItems, onEditMode}) {
+export function Main({items, setTodos, onHitEnter,removeItem, onCompleteItem, onToggleAllItems, onEditMode}) {
         
-    const [editMode, setEditMode] = useState(false);
 
     // function handleCompletedItem(event) {
     //     onCompleteItem(event.target.checked);
     // }
     function handleEditInput(event) {
-        if (event.key === 'Enter') {            
-            // console.log(event.target.value);
-            
-            onEditMode(event);
-            setEditMode(false);
-            // event.edit = false;
-            // event.title = event.target.value;
-            // console.log(event);
+        if (event.key === 'Enter') {
+            console.log(event);    
+            console.log(event.target.value); 
+            console.log('event.target: ', event.target);       
+            onHitEnter(event.target.value);
             }
         };
     
@@ -54,8 +50,7 @@ export function Main({items, add,removeItem, onCompleteItem, onToggleAllItems, o
                 <label style={item.completed?{textDecoration: 'line-through'}: null}>{item.title}</label>
                 <button className="destroy" onClick={() => removeItem(item)}/>
                 </div>
-                <input type='text' className="edit" onKeyUp={handleEditInput} />
-                </li>
+                <input type='text' className="edit" onKeyUp={handleEditInput}/></li>
                 )})}
             </ul>
         </main>

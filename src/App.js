@@ -13,6 +13,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [noneCompletedItemsCount, setNoneCompletedItemsCount] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
 
   useEffect( ()=> {
     const uncompleted = todos.filter(todo=>!todo.completed);
@@ -84,10 +85,44 @@ function App() {
         return task;
       })
       // console.log(editTask);
-      setEditMode(editTask.edit);
+      // setEditMode(editTask.edit);
       setTodos(editTask);
-      console.log(editTask);
     
+  }
+  
+//   const updateTodoTask = (title) => {
+//     const result = todos.find(({ title }) => title === title);
+//     const updateTask = todos.map(task => {
+//       if (task.id === id) {
+//         return ({...task, title:title, edit: !task.edit})
+//       }
+//       return task;
+//     })
+//     setTodos(updateTask);
+//     setEditMode(updateTask.edit);
+//     console.log(updateTask);
+//   }
+//     console.log(result);
+    
+// return ({...task, title:result.title, edit: !task.edit})
+//       }
+//       return task;
+//     })
+//     setTodos(updateTask);
+//     setEditMode(updateTask.edit);
+//     console.log(updateTask);
+//   }
+
+  const updateTodoTask = (title) => {
+    const updateTask = todos.map(task => {
+      if (task.id.tile === title) {
+        return ({...task, title:title, edit: !task.edit})
+      }
+      return task;
+    })
+    setTodos(updateTask);
+    setEditMode(updateTask.edit);
+    console.log(updateTask);
   }
         
         
@@ -110,7 +145,7 @@ function App() {
   return (
     <section className="todoapp">
       <Header title={appTitle} onAddItem={addTodo} onToggleAllItems = {toggleAll} text="Add a task" />
-      <Main items={todos} className='main' add={addTodo} onEditMode = {dubleClickEditTask} onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
+      <Main items={todos} className='main' setTodos={setTodos} add={addTodo} onEditMode = {dubleClickEditTask} onHitEnter={updateTodoTask} onCompleteItem = {markAsCompleted} removeItem={removeTodo}/> 
       <Footer onClearCompleted={clearAllCompletedItems} itemLeftCount={noneCompletedItemsCount} className="footer"/>
     </section>
     );
