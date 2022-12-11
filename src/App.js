@@ -113,9 +113,9 @@ function App() {
 //     console.log(updateTask);
 //   }
 
-  const updateTodoTask = (title) => {
+  const updateTodoTask = (title, id) => {
     const updateTask = todos.map(task => {
-      if (task.id.tile === title) {
+      if (task.id === id) {
         return ({...task, title:title, edit: !task.edit})
       }
       return task;

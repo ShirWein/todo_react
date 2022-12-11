@@ -23,12 +23,12 @@ export function Main({items, setTodos, onHitEnter,removeItem, onCompleteItem, on
     // function handleCompletedItem(event) {
     //     onCompleteItem(event.target.checked);
     // }
-    function handleEditInput(event) {
+    function handleEditInput(event, id) {
         if (event.key === 'Enter') {
             console.log(event);    
             console.log(event.target.value); 
             console.log('event.target: ', event.target);       
-            onHitEnter(event.target.value);
+            onHitEnter(event.target.value, id);
             }
         };
     
@@ -50,7 +50,7 @@ export function Main({items, setTodos, onHitEnter,removeItem, onCompleteItem, on
                 <label style={item.completed?{textDecoration: 'line-through'}: null}>{item.title}</label>
                 <button className="destroy" onClick={() => removeItem(item)}/>
                 </div>
-                <input type='text' className="edit" onKeyUp={handleEditInput}/></li>
+                <input type='text' className="edit" onKeyUp={(event) => handleEditInput(event, item.id)}/></li>
                 )})}
             </ul>
         </main>
