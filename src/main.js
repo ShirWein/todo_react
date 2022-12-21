@@ -43,7 +43,7 @@ export function Main({items, setTodos, onHitEnter,removeItem, onCompleteItem, on
             
             <ul className='todo-list'>
             {items.map(item => {
-                return (<li className={(item.completed ? 'completed' : '') || (item.edit ? 'editing' : '')} >
+                return (<li className={(item.completed ? 'completed' : '') || (item.edit ? 'editing' : '')} key={item.id} >
                     <div onDoubleClick={() =>onEditMode(item.id)} className="view">
                 <input className="toggle"
                     type="checkbox" onChange={() => onCompleteItem(item.id)}/>

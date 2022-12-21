@@ -4,7 +4,8 @@ import {Header} from './header.js';
 import {Main} from './main.js';
 import List from './main.js';
 import {Footer} from './footer.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
+import './providers/list-context.js';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [noneCompletedItemsCount, setNoneCompletedItemsCount] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const countRef = useRef(0);
   // const [editMode, setEditMode] = useState(false);
 
   useEffect( ()=> {
@@ -41,6 +43,10 @@ function App() {
   const addTodo = (title) => {
     const newTodos = todos.concat({id: Date.now(), title, completed: false, edit:false});
     // or: todos = [...todos, {id: Date.now(), title, completed: false}]
+    if (countRef > 5) {
+      alert('You reach the limit');
+    }
+    countRef.current +=1;
     setTodos(newTodos);
     // setCount(count+1);
   }
